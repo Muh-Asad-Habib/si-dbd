@@ -10,10 +10,24 @@ const atkinson = Atkinson_Hyperlegible({
   weight: ["400", "700"],
 });
 
+// Netlify mengisi URL saat build; gambar pratinjau WhatsApp butuh alamat absolut.
+const SITE_URL = process.env.SITE_URL || process.env.URL || "https://si-dbd-skrining.netlify.app";
+const TITLE = "SI-DBD · Skrining Demam Berdarah Dengue";
+const DESC = "Cek gejala DBD dalam ±2 menit. 10 pertanyaan Ya/Tidak, gratis, langsung dapat saran tindak lanjut.";
+
 export const metadata: Metadata = {
-  title: "SI-DBD · Skrining Demam Berdarah Dengue",
-  description:
-    "Skrining mandiri gejala Demam Berdarah Dengue (DBD). Cepat, gratis, dan langsung mendapat rekomendasi tindak lanjut.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESC,
+  applicationName: "SI-DBD",
+  openGraph: {
+    type: "website",
+    locale: "id_ID",
+    siteName: "SI-DBD",
+    title: "Skrining DBD Mandiri · SI-DBD",
+    description: DESC,
+  },
+  twitter: { card: "summary_large_image", title: "Skrining DBD Mandiri · SI-DBD", description: DESC },
 };
 
 export const viewport: Viewport = {
