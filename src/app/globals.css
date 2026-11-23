@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #eef4fa;
+  --color-brand-100: #d9e6f2;
+  --color-brand-200: #b3cce4;
+  --color-brand-300: #7fa8cf;
+  --color-brand-400: #3f7bb3;
+  --color-brand-500: #175c9c;
+  --color-brand-600: #0b4f8a;
+  --color-brand-700: #083f70;
+  --color-brand-800: #062f54;
+  --color-brand-900: #04203a;
+  --color-go-600: #1a7f37;
+  --color-go-700: #13612a;
+  --color-go-900: #0b3d1a;
+  --color-ink: #1d2a35;
+  --color-muted: #4c6272;
+  --color-line: #d8dde0;
+  --color-paper: #f0f4f5;
+  --color-focus: #ffbf47;
+}
+
+/* Ukuran huruf dasar bisa diperbesar lewat tombol "Ukuran huruf" (data-text di <html>). */
+html {
+  -webkit-tap-highlight-color: transparent;
+  font-size: 106.25%;
+  scroll-behavior: smooth;
+}
+html[data-text="l"] {
+  font-size: 118.75%;
+}
+html[data-text="xl"] {
+  font-size: 131.25%;
+}
+
+body {
+  color: var(--color-ink);
+  line-height: 1.6;
+  background: var(--color-paper);
+  min-height: 100dvh;
+}
+
+/* Fokus kuning tebal: mudah terlihat oleh pengguna keyboard & lansia. */
+:focus-visible {
+  outline: 4px solid var(--color-focus);
+  outline-offset: 0;
+  box-shadow: 0 0 0 7px var(--color-ink);
+}
+
+button,
+a,
+summary,
+select,
+label {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@utility card {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-line);
+  background: #ffffff;
+}
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.25rem;
+  border-radius: 0.375rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.25;
+  transition: background-color 120ms;
+  &:active {
+    transform: translateY(2px);
+    box-shadow: none !important;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+}
+
+@utility btn-go {
+  @apply btn bg-go-600 text-white shadow-[0_4px_0_var(--color-go-900)] hover:bg-go-700;
+}
+
+@utility btn-primary {
+  @apply btn bg-brand-600 text-white shadow-[0_4px_0_var(--color-brand-900)] hover:bg-brand-700;
+}
+
+@utility btn-ghost {
+  @apply btn border-2 border-brand-600 bg-white text-brand-700 shadow-[0_4px_0_var(--color-brand-600)] hover:bg-brand-50;
+}
+
+@utility input {
+  @apply min-h-[3.25rem] w-full rounded-md border-2 border-ink bg-white px-4 py-3 text-lg outline-none;
+}
+
+@utility action-btn {
+  @apply inline-flex min-h-[3.25rem] items-center justify-center gap-2 rounded-md border-2 border-brand-600 bg-white px-3 py-3 text-base font-bold text-brand-700 hover:bg-brand-50;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .card {
+    border: 1px solid #999;
+  }
+}
+
+/* Halaman petugas: tanpa menu bawah publik dan tanpa footer publik. */
+body:has([data-admin-page]) .bottom-nav,
+body:has([data-admin-page]) footer {
+  display: none;
+}
+body:has([data-admin-page]) #konten {
+  padding-bottom: 3rem;
+}
+
+/* Pop-up persetujuan: lembar bawah di HP, kotak tengah di layar lebar. */
+.consent-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgb(11 12 12 / 0.6);
+  color: var(--color-ink);
+  overscroll-behavior: contain;
+}
+.consent-dialog[open] {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.consent-dialog::backdrop {
+  background: transparent;
+}
+.consent-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 92%;
+  overflow: hidden;
+  background: #fff;
+  border-top: 6px solid var(--color-brand-600);
+  border-radius: 8px 8px 0 0;
+}
+@media (min-width: 640px) {
+  .consent-dialog[open] {
+    align-items: center;
+    padding: 1rem;
+  }
+  .consent-panel {
+    max-width: 36rem;
+    max-height: 85%;
+    border-radius: 6px;
+  }
+}
+
