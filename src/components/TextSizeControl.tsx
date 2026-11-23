@@ -35,7 +35,7 @@ export function TextSizeControl() {
     <button
       onClick={cycle}
       aria-label={`Ukuran huruf: ${label}. Ketuk untuk mengubah.`}
-      className="inline-flex min-h-12 items-center gap-1 rounded-md border-2 border-white/70 px-3 font-bold text-white hover:bg-white/10"
+      className="inline-flex min-h-11 items-center gap-1 rounded-md border-2 border-white/70 px-3 font-bold text-white hover:bg-white/10"
     >
       <span aria-hidden className="leading-none">
         <span className="text-sm">A</span>

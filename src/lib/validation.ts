@@ -7,6 +7,12 @@ export const LAINNYA = "Lainnya";
 
 export const profileSchema = z
   .object({
+    name: z
+      .string()
+      .trim()
+      .min(2)
+      .max(80)
+      .regex(/^[\p{L}\p{M} .,'-]+$/u),
     age: z.number().int().min(1).max(120),
     gender: z.enum(["Laki-laki", "Perempuan"]),
     kecamatan: z.string().min(1).max(80),

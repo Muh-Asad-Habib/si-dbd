@@ -27,7 +27,11 @@ function write(key: string, value: unknown) {
 }
 
 export const store = {
-  getProfile: () => read<Profile>(KEY_PROFILE),
+  getProfile: () => {
+    const p = read<Profile>(KEY_PROFILE);
+    return p && typeof p.name === "string" && p.name.trim().length >= 2 ? p : null;
+  },
+  getProfileDraft: () => read<Partial<Profile>>(KEY_PROFILE),
   setProfile: (p: Profile) => write(KEY_PROFILE, p),
   clearProfile: () => localStorage.removeItem(KEY_PROFILE),
   getConsent: () => read<boolean>(KEY_CONSENT) === true,

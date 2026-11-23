@@ -167,7 +167,7 @@ export default function SkriningPage() {
   if (phase === "consent") {
     return (
       <div className="max-w-2xl">
-        <h1 className="text-[2rem] font-bold leading-tight">Skrining DBD</h1>
+        <h1 className="page-title">Skrining DBD</h1>
         <p className="mt-2 text-lg">Setujui keterangan skrining terlebih dahulu untuk memulai.</p>
         <ConsentDialog open onAgree={begin} onCancel={() => router.push("/")} />
       </div>
@@ -177,7 +177,7 @@ export default function SkriningPage() {
   if (phase === "profile") {
     return (
       <ProfileForm
-        initial={profile}
+        initial={profile ?? store.getProfileDraft()}
         onBack={profile ? () => setPhase("questions") : () => router.push("/")}
         onSave={(p) => {
           store.setProfile(p);
@@ -195,7 +195,7 @@ export default function SkriningPage() {
     return (
       <div className="max-w-2xl">
         <BackLink onClick={() => setPhase("questions")}>Kembali</BackLink>
-        <h1 ref={headingRef} tabIndex={-1} className="mt-3 text-[2rem] font-bold leading-tight outline-none">
+        <h1 ref={headingRef} tabIndex={-1} className="mt-3 page-title outline-none">
           Periksa jawaban Anda
         </h1>
         <p className="mt-2 text-lg">Pastikan jawaban sudah benar sebelum melihat hasil.</p>
@@ -212,7 +212,7 @@ export default function SkriningPage() {
             label="Data"
             value={
               profile
-                ? `${profile.age} tahun, ${profile.gender.toLowerCase()}, ${profile.kelurahan}, ${profile.kecamatan}`
+                ? `${profile.name}, ${profile.age} tahun, ${profile.gender.toLowerCase()}, ${profile.kelurahan}, ${profile.kecamatan}`
                 : "-"
             }
             onChange={() => setPhase("profile")}
@@ -245,7 +245,8 @@ export default function SkriningPage() {
 
         <h2 className="mt-8 text-xl font-bold">Kirim jawaban</h2>
         <p className="mt-2 text-lg">
-          Jawaban dikirim tanpa nama. Anda akan mendapat kode hasil untuk ditunjukkan ke petugas kesehatan.
+          Nama dan jawaban dikirim ke petugas kesehatan untuk pemantauan. Anda akan mendapat kode hasil untuk
+          ditunjukkan ke petugas.
         </p>
         <button onClick={submit} disabled={submitting} className="btn-go mt-5 w-full text-xl sm:w-auto">
           {submitting && <Loader2 className="h-5 w-5 animate-spin" aria-hidden />}
@@ -270,7 +271,7 @@ export default function SkriningPage() {
 
       {profile && (
         <p className="mt-2 border-b border-line pb-3 text-muted">
-          Untuk: {profile.age} th, {profile.gender.toLowerCase()}, {profile.kecamatan}.{" "}
+          Untuk: <b className="text-ink">{profile.name}</b>, {profile.age} th, {profile.gender.toLowerCase()}.{" "}
           <button
             onClick={() => setPhase("profile")}
             className="inline min-h-0 text-brand-600 underline underline-offset-4"
@@ -319,7 +320,7 @@ export default function SkriningPage() {
               Tanda bahaya
             </strong>
           )}
-          <h1 ref={headingRef} tabIndex={-1} className="block text-[1.625rem] font-bold leading-snug outline-none sm:text-[2rem]">
+          <h1 ref={headingRef} tabIndex={-1} className="block page-title outline-none">
             {Q.text}
           </h1>
         </legend>
@@ -409,11 +410,12 @@ function ProfileForm({
   onSave,
   onBack,
 }: {
-  initial: Profile | null;
+  initial: Partial<Profile> | null;
   onSave: (p: Profile) => void;
   onBack: () => void;
 }) {
-  const [age, setAge] = useState(initial ? String(initial.age) : "");
+  const [name, setName] = useState(initial?.name ?? "");
+  const [age, setAge] = useState(initial?.age ? String(initial.age) : "");
   const [gender, setGender] = useState<string>(initial?.gender ?? "");
   const [kec, setKec] = useState(initial?.kecamatan ?? "");
   const [kel, setKel] = useState(initial?.kelurahan ?? "");
@@ -426,6 +428,9 @@ function ProfileForm({
     e.preventDefault();
     const n = Number(age);
     const errs: Record<string, string> = {};
+    const nm = name.trim().replace(/\s+/g, " ");
+    if (nm.length < 2) errs.nama = "Tulis nama orang yang diperiksa";
+    else if (!/^[\p{L}\p{M} .,'-]+$/u.test(nm)) errs.nama = "Nama hanya boleh berisi huruf";
     if (!age || !Number.isInteger(n) || n < 1 || n > 120) errs.usia = "Masukkan usia antara 1 sampai 120 tahun";
     if (!gender) errs.jk = "Pilih jenis kelamin";
     if (!kec) errs.kec = "Pilih kecamatan";
@@ -436,6 +441,7 @@ function ProfileForm({
       return;
     }
     const parsed = profileSchema.safeParse({
+      name: nm,
       age: n,
       gender,
       kecamatan: kec,
@@ -481,10 +487,30 @@ function ProfileForm({
       )}
 
       <p className="mt-4 text-lg text-muted">Langkah 1 dari 2</p>
-      <h1 className="text-[2rem] font-bold leading-tight">Tentang orang yang diperiksa</h1>
+      <h1 className="page-title">Tentang orang yang diperiksa</h1>
       <p className="mt-2 text-lg">
-        Tidak perlu nama. Data ini disimpan di HP Anda agar tidak perlu diisi ulang.
+        Nama dikirim ke petugas kesehatan bersama hasil skrining. Data ini juga disimpan di HP Anda agar tidak
+        perlu diisi ulang.
       </p>
+
+      <div className={`mt-8 ${errClass("nama")}`}>
+        <label htmlFor="nama" className="block text-xl font-bold">
+          Nama
+        </label>
+        <p className="text-muted">Nama lengkap atau panggilan.</p>
+        <ErrMsg k="nama" />
+        <input
+          id="nama"
+          type="text"
+          autoComplete="name"
+          autoCapitalize="words"
+          maxLength={80}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          aria-describedby={errors.nama ? "nama-err" : undefined}
+          className="input mt-2 w-full text-xl"
+        />
+      </div>
 
       <div className={`mt-8 ${errClass("usia")}`}>
         <label htmlFor="usia" className="block text-xl font-bold">

@@ -72,7 +72,7 @@ const TOC = [
 export default function EdukasiPage() {
   return (
     <article className="max-w-2xl">
-      <h1 className="text-[2rem] font-bold leading-tight sm:text-[2.5rem]">Demam Berdarah Dengue (DBD)</h1>
+      <h1 className="page-title">Demam Berdarah Dengue (DBD)</h1>
       <p className="mt-3 text-xl">Kenali gejala, tanda bahaya, cara merawat, dan cara mencegahnya.</p>
 
       <nav aria-labelledby="isi" className="mt-6 border-l-8 border-line pl-4">

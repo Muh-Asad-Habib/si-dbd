@@ -50,7 +50,7 @@ export default async function HasilPage({ params }: { params: Promise<{ code: st
     <div className="max-w-2xl">
       <div className={`rounded-md p-6 text-center sm:p-8 ${PANEL[result.level]}`}>
         <p className="text-lg">Hasil skrining DBD</p>
-        <h1 className="mt-1 text-[2rem] font-bold leading-tight sm:text-[2.5rem]">{info.title}</h1>
+        <h1 className="mt-1 page-title">{info.title}</h1>
         <p className="mt-4 text-xl">
           <b className="text-[2.5rem] leading-none">{result.componentsMet}</b>
           <span className="text-2xl"> / 4</span>

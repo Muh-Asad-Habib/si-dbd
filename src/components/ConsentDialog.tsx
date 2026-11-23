@@ -7,8 +7,8 @@ import { store } from "@/lib/storage";
 
 export const CONSENT_POINTS = [
   "Skrining ini sukarela. Anda boleh berhenti kapan saja.",
-  "Kami tidak meminta nama, NIK, atau nomor HP.",
-  "Usia, jenis kelamin, wilayah, dan jawaban disimpan tanpa identitas untuk pemantauan DBD per wilayah.",
+  "Kami hanya meminta nama, tanpa NIK atau nomor HP.",
+  "Nama, usia, jenis kelamin, wilayah, dan jawaban dapat dilihat petugas kesehatan untuk pemantauan DBD.",
   "Hasil skrining bukan diagnosis. Diagnosis hanya oleh tenaga kesehatan.",
 ];
 

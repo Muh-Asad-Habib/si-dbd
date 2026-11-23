@@ -4,6 +4,7 @@ export const responses = pgTable("responses", {
   id: uuid("id").primaryKey().defaultRandom(),
   code: text("code").notNull().unique(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+  name: text("name").notNull().default(""),
   age: integer("age").notNull(),
   gender: text("gender").notNull(),
   kecamatan: text("kecamatan").notNull(),

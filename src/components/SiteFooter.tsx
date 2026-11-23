@@ -3,7 +3,7 @@ import Link from "next/link";
 export function SiteFooter() {
   return (
     <footer className="no-print mt-14 border-t-4 border-brand-600 bg-white">
-      <div className="mx-auto max-w-5xl space-y-5 px-4 pb-32 pt-8 sm:px-6 md:pb-10">
+      <div className="mx-auto max-w-5xl space-y-5 px-4 pb-10 pt-8 sm:px-6">
         <div className="border-l-8 border-[#c8102e] bg-[#fdf1f2] p-4">
           <p className="text-lg font-bold">Keadaan darurat?</p>
           <p className="mt-1">

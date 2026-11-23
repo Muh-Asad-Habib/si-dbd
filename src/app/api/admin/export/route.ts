@@ -5,7 +5,9 @@ import { responses } from "@/lib/schema";
 import { QUESTIONS } from "@/lib/questions";
 
 function csvCell(v: unknown) {
-  const s = String(v ?? "");
+  let s = String(v ?? "");
+  // Cegah formula injection saat CSV dibuka di Excel.
+  if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
   return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
@@ -16,6 +18,7 @@ export async function GET() {
   const header = [
     "kode",
     "waktu",
+    "nama",
     "usia",
     "jenis_kelamin",
     "kecamatan",
@@ -29,6 +32,7 @@ export async function GET() {
     [
       r.code,
       r.createdAt.toISOString(),
+      r.name,
       r.age,
       r.gender,
       r.kecamatan,

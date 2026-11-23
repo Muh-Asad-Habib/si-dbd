@@ -9,6 +9,7 @@ await sql`
     id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     code text NOT NULL UNIQUE,
     created_at timestamptz NOT NULL DEFAULT now(),
+    name text NOT NULL DEFAULT '',
     age integer NOT NULL,
     gender text NOT NULL,
     kecamatan text NOT NULL,
@@ -19,5 +20,6 @@ await sql`
     warning_signs boolean NOT NULL,
     consent boolean NOT NULL
   )`;
+await sql`ALTER TABLE responses ADD COLUMN IF NOT EXISTS name text NOT NULL DEFAULT ''`;
 await sql`CREATE INDEX IF NOT EXISTS responses_created_at_idx ON responses (created_at DESC)`;
 console.log("Tabel responses siap.");

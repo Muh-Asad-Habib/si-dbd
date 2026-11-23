@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Atkinson_Hyperlegible } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { BottomNav } from "@/components/BottomNav";
 import "./globals.css";
 
 const atkinson = Atkinson_Hyperlegible({
@@ -14,7 +13,7 @@ const atkinson = Atkinson_Hyperlegible({
 export const metadata: Metadata = {
   title: "SI-DBD · Skrining Demam Berdarah Dengue",
   description:
-    "Skrining mandiri gejala Demam Berdarah Dengue (DBD). Cepat, anonim, dan langsung mendapat rekomendasi tindak lanjut.",
+    "Skrining mandiri gejala Demam Berdarah Dengue (DBD). Cepat, gratis, dan langsung mendapat rekomendasi tindak lanjut.",
 };
 
 export const viewport: Viewport = {
@@ -44,7 +43,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </main>
           <SiteFooter />
         </div>
-        <BottomNav />
       </body>
     </html>
   );

@@ -1,13 +1,13 @@
 # SI-DBD — Sistem Informasi Skrining Demam Berdarah Dengue
 
-Aplikasi web skrining mandiri gejala **Demam Berdarah Dengue (DBD)** untuk masyarakat umum. Responden mengisi persetujuan, identitas anonim, dan 10 pertanyaan Ya/Tidak. Setelah itu aplikasi menampilkan hasil, rekomendasi tindak lanjut, dan edukasi.
+Aplikasi web skrining mandiri gejala **Demam Berdarah Dengue (DBD)** untuk masyarakat umum. Responden mengisi persetujuan, identitas, dan 10 pertanyaan Ya/Tidak. Setelah itu aplikasi menampilkan hasil, rekomendasi tindak lanjut, dan edukasi.
 
 > **Disclaimer:** Hasil skrining **bukan diagnosis medis**. DBD hanya dapat dipastikan melalui pemeriksaan tenaga kesehatan dan laboratorium. Dalam keadaan darurat hubungi **112** / **119**.
 
 ## Fitur
 
 - **Beranda & persetujuan.** Penjelasan aplikasi dan tujuan skrining. Tombol **Mulai skrining** membuka pop-up persetujuan. Skrining baru dimulai setelah kotak persetujuan dicentang. Persetujuan diminta lagi untuk setiap skrining baru.
-- **Identitas anonim.** Usia, jenis kelamin, dan domisili (kecamatan/kelurahan). Tidak meminta nama, NIK, atau nomor HP.
+- **Identitas responden.** Nama, usia, jenis kelamin, dan domisili (kecamatan/kelurahan). Tidak meminta NIK atau nomor HP. Nama tidak ditampilkan di halaman hasil publik.
 - **Tersimpan di perangkat.** Identitas, draf jawaban, dan riwayat disimpan di `localStorage`. Pengguna tidak perlu mengisi identitas ulang. Tautan **Ganti orang** tersedia untuk responden berbeda.
 - **Kuesioner 10 pertanyaan.** Satu pertanyaan per layar, progress bar, dan halaman tinjau sebelum kirim. Peringatan darurat muncul bila tanda bahaya dijawab Ya.
 - **Hasil skrining.** Skor komponen (x/4), tingkat risiko (hijau/kuning/merah), interpretasi, dan rekomendasi. Setiap hasil punya kode unik (mis. `DBD-261123-1A2B3C`).
@@ -15,12 +15,13 @@ Aplikasi web skrining mandiri gejala **Demam Berdarah Dengue (DBD)** untuk masya
 - **Edukasi.** Fase penyakit, tanda bahaya, perawatan di rumah, 3M Plus, serta mitos vs fakta.
 - **Layanan.** Nomor darurat, tautan puskesmas terdekat (Google Maps), dan daftar fasilitas kesehatan.
 - **Riwayat.** Cari hasil dengan kode dan lihat riwayat di perangkat.
-- **Dashboard petugas** di alamat rahasia `/<ADMIN_PATH>` (bukan `/admin`), login kata sandi, tampilan dioptimalkan untuk HP. Statistik, grafik 30 hari, sebaran kecamatan, frekuensi jawaban per pertanyaan, dan ekspor CSV.
+- **Dashboard petugas** di alamat rahasia `/<ADMIN_PATH>` (bukan `/admin`), login kata sandi, tampilan dioptimalkan untuk HP. Statistik, grafik 30 hari, sebaran kecamatan, frekuensi jawaban per pertanyaan, ekspor CSV, serta **hapus data** per responden atau semuanya (untuk uji coba). Setiap penghapusan meminta konfirmasi; hapus semua wajib mengetik `HAPUS`.
 
 ## Desain
 
 - Gaya layanan publik yang datar dan jelas, terinspirasi GOV.UK dan NHS. Tanpa animasi dan dekorasi.
 - Diutamakan untuk HP. Teks besar, tombol dan pilihan jawaban besar, satu pertanyaan per layar.
+- Navigasi lewat tombol **Menu** di header, tanpa navbar bawah.
 - Tombol **AA** di header memperbesar teks. Tombol **Bacakan pertanyaan** membacakan soal dengan suara.
 - Fokus keyboard terlihat jelas dan pesan kesalahan muncul di atas formulir.
 
@@ -117,9 +118,9 @@ scripts/
 
 ## Privasi
 
-- Tidak ada data identitas langsung (nama, NIK, nomor HP).
+- Data identitas hanya nama, tanpa NIK atau nomor HP.
 - Data di perangkat tersimpan di `localStorage` dan bisa dihapus dari halaman **Riwayat**.
-- Data di server hanya usia, jenis kelamin, wilayah, jawaban, dan hasil skrining.
+- Data di server: nama, usia, jenis kelamin, wilayah, jawaban, dan hasil skrining. Petugas dapat menghapusnya dari dashboard.
 
 ## Keamanan dashboard petugas
 

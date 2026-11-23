@@ -20,6 +20,7 @@ export async function POST(req: Request) {
     try {
       await getDb().insert(responses).values({
         code,
+        name: profile.name,
         age: profile.age,
         gender: profile.gender,
         kecamatan: profile.kecamatan,

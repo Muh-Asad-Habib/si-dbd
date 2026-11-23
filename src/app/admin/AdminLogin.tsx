@@ -31,9 +31,9 @@ export function AdminLogin({ gate }: { gate: string }) {
   }
 
   return (
-    <div data-admin-page className="mx-auto max-w-md">
-      <h1 className="text-[2rem] font-bold leading-tight">Masuk petugas</h1>
-      <p className="mt-2 text-lg text-muted">Khusus petugas kesehatan. Jangan bagikan alamat halaman ini.</p>
+    <div data-admin-page className="mx-auto max-w-md rounded-md border border-line border-t-[6px] border-t-brand-600 bg-white p-5 sm:mt-6 sm:p-7">
+      <h1 className="page-title">Masuk petugas</h1>
+      <p className="mt-2 text-muted">Khusus petugas kesehatan. Jangan bagikan alamat halaman ini.</p>
 
       <form onSubmit={submit} className="mt-6 space-y-5">
         <div className={err ? "border-l-8 border-[#c8102e] pl-4" : ""}>

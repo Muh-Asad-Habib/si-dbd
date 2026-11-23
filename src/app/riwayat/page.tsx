@@ -50,7 +50,7 @@ export default function RiwayatPage() {
 
   return (
     <div className="max-w-2xl">
-      <h1 className="text-[2rem] font-bold leading-tight sm:text-[2.5rem]">Riwayat skrining</h1>
+      <h1 className="page-title">Riwayat skrining</h1>
       <p className="mt-3 text-xl">Hasil skrining yang pernah diisi di HP ini.</p>
 
       <section aria-labelledby="daftar" className="mt-8">
@@ -130,7 +130,7 @@ export default function RiwayatPage() {
         </h2>
         {profile ? (
           <p className="mt-3 text-lg">
-            {profile.age} tahun, {profile.gender.toLowerCase()}, {profile.kelurahan}, {profile.kecamatan}.
+            {profile.name}, {profile.age} tahun, {profile.gender.toLowerCase()}, {profile.kelurahan}, {profile.kecamatan}.
           </p>
         ) : (
           <p className="mt-3 text-lg">Tidak ada data responden tersimpan.</p>

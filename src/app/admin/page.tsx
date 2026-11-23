@@ -64,7 +64,9 @@ export default async function AdminPage() {
       byDay={byDay}
       symptoms={symptomData}
       recent={recent.map((r) => ({
+        id: r.id,
         code: r.code,
+        name: r.name,
         createdAt: r.createdAt.toISOString(),
         age: r.age,
         gender: r.gender,

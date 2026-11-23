@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Layanan Kesehatan · SI-DBD" };
 export default function LayananPage() {
   return (
     <div className="max-w-2xl">
-      <h1 className="text-[2rem] font-bold leading-tight sm:text-[2.5rem]">Puskesmas dan rumah sakit</h1>
+      <h1 className="page-title">Puskesmas dan rumah sakit</h1>
       <p className="mt-3 text-xl">Tempat pemeriksaan DBD dan nomor darurat.</p>
 
       <section aria-labelledby="darurat" className="mt-8 border-l-8 border-[#c8102e] bg-white p-4">
