@@ -15,7 +15,7 @@ Aplikasi web skrining mandiri gejala **Demam Berdarah Dengue (DBD)** untuk masya
 - **Edukasi.** Fase penyakit, tanda bahaya, perawatan di rumah, 3M Plus, serta mitos vs fakta.
 - **Layanan.** Nomor darurat, tautan puskesmas terdekat (Google Maps), dan daftar fasilitas kesehatan.
 - **Riwayat.** Cari hasil dengan kode dan lihat riwayat di perangkat.
-- **Dashboard petugas** di alamat rahasia `/<ADMIN_PATH>` (bukan `/admin`), login kata sandi, tampilan dioptimalkan untuk HP. Statistik, grafik 30 hari, sebaran kecamatan, frekuensi jawaban per pertanyaan, ekspor CSV, serta **hapus data** per responden atau semuanya (untuk uji coba). Setiap penghapusan meminta konfirmasi; hapus semua wajib mengetik `HAPUS`.
+- **Dashboard petugas** di alamat rahasia `/<ADMIN_PATH>` (bukan `/admin`), login kata sandi, tampilan dioptimalkan untuk HP. Statistik, grafik 30 hari, sebaran kecamatan, frekuensi jawaban per pertanyaan, ekspor Excel (.xlsx, satu kolom per data), serta **hapus data** per responden atau semuanya (untuk uji coba). Setiap penghapusan meminta konfirmasi; hapus semua wajib mengetik `HAPUS`.
 
 ## Desain
 

@@ -116,7 +116,7 @@ export function AdminDashboard({ gate, total, levels, byKec, byDay, symptoms, re
             <RefreshCw className={`h-5 w-5 ${refreshing ? "animate-spin" : ""}`} aria-hidden /> Muat ulang
           </button>
           <a href="/api/admin/export" className="tool-btn">
-            <Download className="h-5 w-5" aria-hidden /> CSV
+            <Download className="h-5 w-5" aria-hidden /> Excel
           </a>
           <button onClick={logout} className="tool-btn">
             <LogOut className="h-5 w-5" aria-hidden /> Keluar
@@ -377,7 +377,7 @@ export function AdminDashboard({ gate, total, levels, byKec, byDay, symptoms, re
         <h2 id="zona-hapus" className="font-bold text-[#a00d25]">Hapus semua data</h2>
         <p className="mt-1 text-[0.95rem] text-muted">
           Untuk membersihkan data uji coba. Semua {total} data responden akan dihapus permanen dan tidak bisa
-          dikembalikan. Unduh CSV dulu bila perlu.
+          dikembalikan. Unduh Excel dulu bila perlu.
         </p>
         <button
           onClick={() => setPending({ kind: "all" })}
